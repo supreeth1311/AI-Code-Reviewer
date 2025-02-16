@@ -1,7 +1,7 @@
 import streamlit as st
-#import google.generativeai as ai
+import google.generativeai as genai
 
-ai.configure(api_key="AIzaSyD1Gt4fuV23MybKvkU5vi7X1w8F3KRxl_o")
+genai.configure(api_key="AIzaSyD1Gt4fuV23MybKvkU5vi7X1w8F3KRxl_o")
 
 sys_prompt_ds = """You are a helpful AI Tutor for Data Science.
 Students will ask you doubts related to various topics in data science.
@@ -18,10 +18,10 @@ Users will submit Python code, and you should:
 4. Do not provide assistance for non-Python code.
 """
 
-model_ds = ai.GenerativeModel(model_name="models/gemini-2.0-flash-exp",
+model_ds = genai.GenerativeModel(model_name="models/gemini-2.0-flash-exp",
 system_instruction=sys_prompt_ds)
 
-model_code = ai.GenerativeModel(model_name="models/gemini-2.0-flash-exp",
+model_code = genai.GenerativeModel(model_name="models/gemini-2.0-flash-exp",
 system_instruction=sys_prompt_code)
 
 st.title("AI Data science/Code Assistant ")
