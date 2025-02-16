@@ -1,7 +1,7 @@
-import streamlit as st
+ import streamlit as st
 import google.generativeai as genai
 
-# Configure API Key (Ensure it's securely stored in a .env file or Streamlit secrets)
+# Configure API Key (Ensure it's securely stored)
 genai.configure(api_key="YOUR_API_KEY")
 
 # System Prompts
@@ -26,15 +26,54 @@ model_ds = genai.GenerativeModel(model_name="models/gemini-2.0-flash-exp",
 model_code = genai.GenerativeModel(model_name="models/gemini-2.0-flash-exp",
                                    system_instruction=sys_prompt_code)
 
-# ------------- Streamlit UI Enhancements -------------
+# Inject Custom CSS
+st.markdown("""
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        .main-title {
+            font-size: 32px;
+            text-align: center;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .stTextArea textarea {
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        .stButton>button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            border-radius: 8px;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .stButton>button:hover {
+            background-color: #45a049;
+        }
+        .sidebar .sidebar-content {
+            background-color: #2c3e50;
+            color: white;
+        }
+        .stSelectbox>div {
+            border-radius: 8px;
+            font-size: 16px;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Sidebar with App Info
 st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Google_Gemini_logo.svg/1024px-Google_Gemini_logo.svg.png", width=120)
-st.sidebar.title("AI Code Reviewer & Data Science Tutor")
-st.sidebar.markdown("🚀 Ask questions related to Data Science or get your Python code reviewed!")
+st.sidebar.title("🔹 AI Code & Data Science Tutor")
+st.sidebar.markdown("🚀 Ask AI questions related to Data Science or get your Python code reviewed!")
 
-# Main Title with Styling
-st.markdown("<h1 style='text-align: center; color: #4CAF50;'>AI Data Science & Code Assistant</h1>",
-            unsafe_allow_html=True)
+# Main Title with Custom CSS
+st.markdown("<div class='main-title'>AI Data Science & Code Assistant</div>", unsafe_allow_html=True)
 
 # User Selection
 option = st.selectbox("🔹 Choose your assistant:", ["Data Science Tutor", "Code Reviewer"])
@@ -64,4 +103,5 @@ if st.button("🚀 Generate Answer"):
                                mime="text/plain")
     else:
         st.warning("⚠️ Please enter a query or code before generating a response.")
+
 
