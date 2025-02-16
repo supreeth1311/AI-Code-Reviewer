@@ -26,23 +26,30 @@ model_ds = genai.GenerativeModel(model_name="models/gemini-2.0-flash-exp",
 model_code = genai.GenerativeModel(model_name="models/gemini-2.0-flash-exp",
                                    system_instruction=sys_prompt_code)
 
-# Inject Custom CSS
+# Inject Custom CSS for Styling
 st.markdown("""
     <style>
+        /* Background Gradient */
         body {
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            color: white;
         }
         .main-title {
             font-size: 32px;
             text-align: center;
-            color: #4CAF50;
+            color: #ffffff;
             font-weight: bold;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.3);
         }
         .stTextArea textarea {
             font-size: 16px;
             border-radius: 8px;
             border: 1px solid #ddd;
             padding: 10px;
+            background-color: #f4f4f4;
+            color: black;
         }
         .stButton>button {
             background-color: #4CAF50;
@@ -52,6 +59,7 @@ st.markdown("""
             padding: 10px;
             border: none;
             cursor: pointer;
+            transition: 0.3s;
         }
         .stButton>button:hover {
             background-color: #45a049;
@@ -72,7 +80,7 @@ st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Goog
 st.sidebar.title("🔹 AI Code & Data Science Tutor")
 st.sidebar.markdown("🚀 Ask AI questions related to Data Science or get your Python code reviewed!")
 
-# Main Title with Custom CSS
+# Main Title with Custom Styling
 st.markdown("<div class='main-title'>AI Data Science & Code Assistant</div>", unsafe_allow_html=True)
 
 # User Selection
@@ -103,5 +111,4 @@ if st.button("🚀 Generate Answer"):
                                mime="text/plain")
     else:
         st.warning("⚠️ Please enter a query or code before generating a response.")
-
 
