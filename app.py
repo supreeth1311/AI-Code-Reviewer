@@ -39,8 +39,14 @@ user_prompt = st.text_area("Enter your query or Python code:", height=200)
 btn_click = st.button("Generate Answer")
 
 if btn_click:
-    if option == "Data Science Tutor":
-        response = model_ds.generate_content(user_prompt)
+    with st.spinner("Generating response... Please wait."):
+        if option == "Data Science Tutor":
+            response = model_ds.generate_content(user_prompt)
+        else:
+            response = model_code.generate_content(user_prompt)
+
+    if response:
+        st.write(response.text)
     else:
-        response = model_code.generate_content(user_prompt)
-    st.write(response.text)
+        st.error("No response received. Please try again.")
+
