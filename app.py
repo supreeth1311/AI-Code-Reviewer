@@ -5,10 +5,10 @@ import os
 # Get API key from environment variable (GitHub Secret)
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
-# if not GOOGLE_API_KEY:
-#     st.error("API Key Missing! Set GOOGLE_API_KEY in GitHub Secrets.")
-# else:
-#     genai.configure(api_key=GOOGLE_API_KEY)
+if not GOOGLE_API_KEY:
+    st.error("API Key Missing! Set GOOGLE_API_KEY in GitHub Secrets.")
+else:
+    genai.configure(api_key=GOOGLE_API_KEY)
 
 # System prompts
 sys_prompt_ds = """You are a helpful AI Tutor for Data Science.
